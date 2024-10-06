@@ -12,7 +12,9 @@ jobs:
 
       - name: Install Hydro OJ
         run: |
+          cat backup/backup-parta* > backup.zip
           sudo su - root -c "LANG=zh . <(curl https://hydro.ac/setup.sh)"
+          sudo su - root -c "hydrooj restore backup.zip"
 
       - name: Install Cpolar
         run: |
@@ -34,6 +36,24 @@ jobs:
 
       - name: Perform Backup
         run: |
+          sudo su - root -c "
+          whoami
+          hydrooj backup
+          OUTPUT=\$(ls -t | grep '^backup-' | head -n 1)
+          if [[ -z \"\$OUTPUT\" ]]; then
+              echo '未找到备份文件'
+              exit 1
+          fi
+          echo \"找到备份文件: \$OUTPUT\"  # 输出 OUTPUT 的值
+          rm backup -r -f
+          mkdir backup
+          split -b 10M \$OUTPUT \"./backup/backup-part\"
+          rm \$OUTPUT"
+          git config --global user.name 'GitHub Actions'
+          git config --global user.email 'actions@github.com'
+          git add .
+          git push
+          sleep 3600
           sudo su - root -c "
           whoami
           hydrooj backup
