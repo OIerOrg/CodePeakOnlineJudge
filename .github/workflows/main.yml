@@ -36,6 +36,7 @@ jobs:
       - name: Start Cpolar service
         run: |
           sudo cpolar service start
+          sudo cpolar http 9200
 
       - name: Perform Backup
         run: |
