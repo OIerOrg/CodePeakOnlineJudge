@@ -1,11 +1,7 @@
 name: Install and Backup
 
 on:
-  push:
-    branches:
-      - main
-  schedule:
-    - cron: "0 * * * *"  # 每小时执行一次备份
+  workflow_dispatch:
 
 jobs:
   setup-hydro-cpolar:
