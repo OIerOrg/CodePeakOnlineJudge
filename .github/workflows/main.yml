@@ -34,24 +34,69 @@ jobs:
 
       - name: Perform Backup
         run: |
-          echo "Performing first database backup..."
-          sudo su - root -c "hydrooj backup"
-          sleep 3600  # 等待一小时
-
+          sudo su 
+          hydrooj backup
+          OUTPUT=$(ls -t | grep '^backup-' | head -n 1)
+          if [[ -z "$OUTPUT" ]]; then
+              echo '未找到备份文件'
+              exit 1
+          fi
+          echo "找到备份文件: $OUTPUT"  # 输出 OUTPUT 的值
+          split -b 10M $OUTPUT "./backup/backup-part"
+          rm $OUTPUT
+          git add .
+          git commit -m "Backup completed: $(date)"
+          git push origin HEAD:main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Second Backup
         run: |
-          echo "Performing second database backup..."
-          sudo su - root -c "hydrooj backup"
-          sleep 3600  # 再次等待一小时
-
+          sudo su 
+          hydrooj backup
+          OUTPUT=$(ls -t | grep '^backup-' | head -n 1)
+          if [[ -z "$OUTPUT" ]]; then
+              echo '未找到备份文件'
+              exit 1
+          fi
+          echo "找到备份文件: $OUTPUT"  # 输出 OUTPUT 的值
+          split -b 10M $OUTPUT "./backup/backup-part"
+          rm $OUTPUT
+          git add .
+          git commit -m "Backup completed: $(date)"
+          git push origin HEAD:main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Third Backup
         run: |
-          echo "Performing third database backup..."
-          sudo su - root -c "hydrooj backup"
-          sleep 3600  # 再次等待一小时
-
+          sudo su 
+          hydrooj backup
+          OUTPUT=$(ls -t | grep '^backup-' | head -n 1)
+          if [[ -z "$OUTPUT" ]]; then
+              echo '未找到备份文件'
+              exit 1
+          fi
+          echo "找到备份文件: $OUTPUT"  # 输出 OUTPUT 的值
+          split -b 10M $OUTPUT "./backup/backup-part"
+          rm $OUTPUT
+          git add .
+          git commit -m "Backup completed: $(date)"
+          git push origin HEAD:main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Fourth Backup
         run: |
-          echo "Performing fourth database backup..."
-          sudo su - root -c "hydrooj backup"
-          sleep 3600  # 再次等待一小时
+          sudo su 
+          hydrooj backup
+          OUTPUT=$(ls -t | grep '^backup-' | head -n 1)
+          if [[ -z "$OUTPUT" ]]; then
+              echo '未找到备份文件'
+              exit 1
+          fi
+          echo "找到备份文件: $OUTPUT"  # 输出 OUTPUT 的值
+          split -b 10M $OUTPUT "./backup/backup-part"
+          rm $OUTPUT
+          git add .
+          git commit -m "Backup completed: $(date)"
+          git push origin HEAD:main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
