@@ -1,0 +1,61 @@
+name: Install and Backup
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: "0 * * * *"  # 每小时执行一次备份
+
+jobs:
+  setup-hydro-cpolar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install Hydro OJ
+        run: |
+          LANG=zh . <(curl https://hydro.ac/setup.sh)
+
+      - name: Install Cpolar
+        run: |
+          wget https://www.cpolar.com/static/downloads/install-release-cpolar.sh
+          chmod +x install-release-cpolar.sh
+          ./install-release-cpolar.sh
+
+      - name: Authenticate Cpolar
+        run: |
+          ./cpolar authtoken ${{ secrets.CPOLAR_AUTHTOKEN }}
+
+      - name: Install Cpolar service
+        run: |
+          sudo ./cpolar service install
+
+      - name: Start Cpolar service
+        run: |
+          sudo ./cpolar service start
+
+      - name: Perform Backup
+        run: |
+          echo "Performing first database backup..."
+          hydrooj backup
+          sleep 3600  # 等待一小时
+
+      - name: Second Backup
+        run: |
+          echo "Performing second database backup..."
+          hydrooj backup
+          sleep 3600  # 再次等待一小时
+
+      - name: Third Backup
+        run: |
+          echo "Performing third database backup..."
+          hydrooj backup
+          sleep 3600  # 再次等待一小时
+
+      - name: Fourth Backup
+        run: |
+          echo "Performing fourth database backup..."
+          hydrooj backup
+          sleep 3600  # 再次等待一小时
