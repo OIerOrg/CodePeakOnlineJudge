@@ -44,9 +44,9 @@ jobs:
           fi
           echo \"找到备份文件: \$OUTPUT\"  # 输出 OUTPUT 的值
           split -b 10M \$OUTPUT \"./backup/backup-part\"
-          rm \$OUTPUT
+          rm \$OUTPUT"
           git add .
-          git commit -m \"Backup completed: \$(date)\"
-          git push origin HEAD:main"
+          git commit -m "备份"
+          git push origin HEAD:main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
