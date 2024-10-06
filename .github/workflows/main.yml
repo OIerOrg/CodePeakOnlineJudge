@@ -35,23 +35,23 @@ jobs:
       - name: Perform Backup
         run: |
           echo "Performing first database backup..."
-          hydrooj backup
+          sudo su - root -c "hydrooj backup"
           sleep 3600  # 等待一小时
 
       - name: Second Backup
         run: |
           echo "Performing second database backup..."
-          hydrooj backup
+          sudo su - root -c "hydrooj backup"
           sleep 3600  # 再次等待一小时
 
       - name: Third Backup
         run: |
           echo "Performing third database backup..."
-          hydrooj backup
+          sudo su - root -c "hydrooj backup"
           sleep 3600  # 再次等待一小时
 
       - name: Fourth Backup
         run: |
           echo "Performing fourth database backup..."
-          hydrooj backup
+          sudo su - root -c "hydrooj backup"
           sleep 3600  # 再次等待一小时
