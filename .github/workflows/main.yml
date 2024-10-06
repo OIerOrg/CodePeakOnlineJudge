@@ -12,7 +12,7 @@ jobs:
 
       - name: Install Hydro OJ
         run: |
-          LANG=zh . <(curl https://hydro.ac/setup.sh)
+          sudo LANG=zh . <(curl https://hydro.ac/setup.sh)
 
       - name: Install Cpolar
         run: |
