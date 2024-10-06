@@ -40,7 +40,7 @@ jobs:
       - name: Perform Backup
         run: |
           sudo su - root -c "
-          whoami
+          cd /home/runner/work/CodePeakOnlineJudge/CodePeakOnlineJudge
           hydrooj backup
           OUTPUT=\$(ls -t | grep '^backup-' | head -n 1)
           if [[ -z \"\$OUTPUT\" ]]; then
