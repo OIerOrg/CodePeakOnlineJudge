@@ -12,6 +12,7 @@ jobs:
 
       - name: Install Hydro OJ
         run: |
+          sudo su - root -c "ls -s -l"
           sudo su - root -c "cat backup/backup-parta* > backup.zip"
           sudo su - root -c "ls -s -l"
           sudo su - root -c "LANG=zh . <(curl https://hydro.ac/setup.sh)"
