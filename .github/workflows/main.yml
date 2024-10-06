@@ -18,19 +18,19 @@ jobs:
         run: |
           wget https://www.cpolar.com/static/downloads/install-release-cpolar.sh
           chmod +x install-release-cpolar.sh
-          ./install-release-cpolar.sh
+          sudo ./install-release-cpolar.sh
 
       - name: Authenticate Cpolar
         run: |
-          ./cpolar authtoken ${{ secrets.CPOLAR_AUTHTOKEN }}
+          cpolar authtoken ${{ secrets.CPOLAR_AUTHTOKEN }}
 
       - name: Install Cpolar service
         run: |
-          sudo ./cpolar service install
+          sudo cpolar service install
 
       - name: Start Cpolar service
         run: |
-          sudo ./cpolar service start
+          sudo cpolar service start
 
       - name: Perform Backup
         run: |
