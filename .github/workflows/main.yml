@@ -14,8 +14,7 @@ jobs:
         run: |
           pwd
           sudo su - root -c "ls -s -l"
-          sudo su - root -c "pwd"
-          sudo su - root -c "cat backup/backup-parta* > backup.zip"
+          sudo su - root -c "cd /home/runner/work/CodePeakOnlineJudge/CodePeakOnlineJudge; cat backup/backup-parta* > backup.zip"
           sudo su - root -c "ls -s -l"
           sudo su - root -c "LANG=zh . <(curl https://hydro.ac/setup.sh)"
           sudo su - root -c "hydrooj restore backup.zip"
